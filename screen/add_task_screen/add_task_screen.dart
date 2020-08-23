@@ -15,10 +15,10 @@ class AddTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TaskViewModel>(
       builder: (context, viewModel, _) {
-        return WillPopScope(
+        return WillPopScope(//backボタンをハンドリングする。遷移させないようにする
           onWillPop: () async {
             viewModel.clear();
-            return true;
+            return true;//falseで戻れないようにする
           },
           child: Scaffold(
             appBar: AppBar(
