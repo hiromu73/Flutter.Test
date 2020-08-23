@@ -6,7 +6,7 @@ import 'package:to_do_app/model/task.dart';
 class TaskItem extends StatelessWidget {
   final Task task;
   final VoidCallback onTap;
-  final Function(bool) toggleDone;
+  final Function(bool) toggleDone;//Functionで渡す事で、CheckBoxのonChangedの値を受け取る事ができる
 
   const TaskItem(
       {Key key,
@@ -58,7 +58,7 @@ class TaskItem extends StatelessWidget {
                 print(value);
                 toggleDone(value);
               },
-              activeColor: Colors.lightGreen,
+              activeColor: Colors.blue,
             )
           ],
         ),
