@@ -7,10 +7,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/model/task.dart';
 
-class TaskViewModel extends ChangeNotifier {
+class TaskViewModel extends ChangeNotifier { //ChangeNotifierで継承。状態管理
   String get editingName => nameController.text;
   String get editingMemo => memoController.text;
-  TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();//テキストフィールドを変更すると、値を更新する。初期値を入れる場合などに
   TextEditingController memoController = TextEditingController();
   String _strValidateName = '';
   String get strValidateName => _strValidateName;
@@ -38,14 +38,14 @@ class TaskViewModel extends ChangeNotifier {
     _validateName = value;
   }
 
-  void updateValidateName() {
+  void updateValidateName() {//更新タスク
     if (validateName) {
       validateTaskName();
-      notifyListeners();
+      notifyListeners();//状態変更をUIに反映させる
     }
   }
 
-  void addTask() {
+  void addTask() {//追加タスク
     final newTask = Task(
       name: nameController.text,
       memo: memoController.text,
@@ -56,7 +56,7 @@ class TaskViewModel extends ChangeNotifier {
     clear();
   }
 
-  void updateTask(Task updateTask) {
+  void updateTask(Task updateTask) {//更新タスク
     var updateIndex = _tasks.indexWhere((task) {
       return task.createdAt == updateTask.createdAt;
     });
@@ -67,22 +67,22 @@ class TaskViewModel extends ChangeNotifier {
     clear();
   }
 
-  void deleteTask(int index) {
+  void deleteTask(int index) {//削除タスク
     _tasks.removeAt(index);
-    notifyListeners();
+    notifyListeners();//状態変更をUIに反映させる
   }
 
   void toggleDone(int index, bool isDone) {
     var task = _tasks[index];
     task.isDone = isDone;
     _tasks[index] = task;
-    notifyListeners();
+    notifyListeners();//状態変更をUIに反映させる
   }
 
   void clear() {
     nameController.clear();
     memoController.clear();
     _validateName = false;
-    notifyListeners();
+    notifyListeners();//状態変更をUIに反映させる
   }
 }
