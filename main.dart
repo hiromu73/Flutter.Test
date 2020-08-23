@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/screen/add_task_screen/add_task_screen.dart';
@@ -6,15 +7,13 @@ import 'package:to_do_app/view_model/task_view_model.dart';
 
 
 void main() {
-  print(' Test Todo App !!!');
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => TaskViewModel(),
+    ChangeNotifierProvider(//状態管理
+      create: (context) => TaskViewModel(),//createに状態を維持する関数を渡す
       child: MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   @override
