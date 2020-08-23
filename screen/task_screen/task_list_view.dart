@@ -1,5 +1,4 @@
 
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:to_do_app/screen/add_task_screen/add_task_screen.dart';
 import 'package:to_do_app/screen/task_screen/task_item.dart';
 import 'package:to_do_app/view_model/task_view_model.dart';
 
+//トップリスト
 class TaskListView extends StatelessWidget {
   const TaskListView({
     Key key,
@@ -17,17 +17,17 @@ class TaskListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TaskViewModel>(builder: (context, taskViewModel, _) {
-      if (taskViewModel.tasks.isEmpty) {
-        return _emptyView();
+    return Consumer<TaskViewModel>(builder: (context, taskViewModel, _) {//taskViewModelから値を受け取ったり、メソッドを使用する
+      if (taskViewModel.tasks.isEmpty) {//もし、taskViewModelが空、エラーの場合
+        return _emptyView();//taskViewModelが空、エラーの場合の処理
       }
       return ListView.separated(
           itemBuilder: (context, index) {
             var task = taskViewModel.tasks[index];
-            return Dismissible(
+            return Dismissible(//スライドアニメーション
               key: UniqueKey(),
-              onDismissed: (direction) {
-                if (direction == DismissDirection.endToStart) {
+              onDismissed: (direction) {//不要になったデータを削除
+                if (direction == DismissDirection.endToStart) {//スワイプの方向が左から右の場合
                   taskViewModel.deleteTask(index);
                 } else {
                   taskViewModel.toggleDone(index, true);
